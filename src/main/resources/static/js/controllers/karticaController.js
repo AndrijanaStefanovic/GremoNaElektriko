@@ -1,0 +1,48 @@
+angular.module('mbrsApp.KarticaController',[])
+    .controller('KarticaController', function ($scope, KarticaService) {
+    
+    	$scope.kartice = [];
+    	$scope.sortType     = 'imeVlasnika'; 
+		$scope.sortReverse  = false;  
+    	
+    	KarticaService.findAll()
+    		.then(function successCallback(response) {
+    			$scope.kartice = response.data;
+    		}, function errorCallback(respose){
+    			toastr.error("Greska");
+    		})
+
+    	$scope.openCreateModal = function() {
+    		$scope.kartica = {};
+    		$('#createKarticaModal').modal('toggle');
+    	}
+    		
+    	$scope.createKartica = function() {
+    		KarticaService.createKartica($scope.kartica)
+    			.then(function successCallback(response) {
+    				$scope.kartice.push(response.data);
+    				 $('#createKarticaModal').modal('toggle');
+    			})
+    	}
+
+    	$scope.deleteKartica = function(kartica) {
+    		KarticaService.deleteKartica(kartica.id)
+    			.then(function successCallback(response) {
+    				var index = $scope.kartice.indexOf(kartica);
+    				$scope.kartice.splice(index, 1); 
+    		})
+    	}
+    	
+    	$scope.openUpdateModal = function(kartica) {
+    		$scope.kartica = kartica;
+    		$('#updateKarticaModal').modal('toggle');
+    	}
+    	
+    	$scope.updateKartica = function() {
+    		KarticaService.updateKartica($scope.kartica)
+    			.then(function successCallback(response) {
+    				$('#updateKarticaModal').modal('toggle');
+    		})
+    	}
+    	
+    });

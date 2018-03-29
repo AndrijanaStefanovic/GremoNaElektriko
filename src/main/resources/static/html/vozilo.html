@@ -1,0 +1,88 @@
+<div ng-controller='VoziloController'>
+<h1>Vozila</h1>
+
+<input type="text" class="form-control ng-valid ng-dirty" placeholder="Pretraga po kartici" data-ng-model="searchKeyword">
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<td><a data-ng-click="sortType = 'registracioniBroj'">Registracioni broj<span
+					data-ng-show="sortType == 'registracioniBroj'" class="fa fa-caret-down"></span>
+			</a></td>
+			<td><a data-ng-click="sortType = 'imeVlasnika'">Ime vlasnika kartice<span
+					data-ng-show="sortType == 'imeVlasnika'" class="fa fa-caret-down"></span>
+			</a></td>
+			<td><a data-ng-click="sortType = 'prezimeVlasnika'"> Prezime vlasnika kartice <span
+					data-ng-show="sortType == 'prezimeVlasnika'" class="fa fa-caret-down"></span>
+			</a></td>
+
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<tr data-ng-repeat="x in vozila | orderBy:sortType:sortReverse | filter:filterFunction">
+			<td>{{x.registracioniBroj}}</td>
+			<td>{{x.kartica.imeVlasnika}}</td>
+			<td>{{x.kartica.prezimeVlasnika}}</td>
+			<td>
+				<button type="button" class="btn btn-info" data-ng-click="openUpdateModal(x)">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button>
+				<button type="button" class="btn btn-danger" data-ng-click="deleteVozilo(x)">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<button type="button" class="btn btn-info" data-ng-click="openCreateModal()">Novo vozilo</button>
+
+<div id="createVoziloModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Novo vozilo</h4>
+			</div>
+			<div class="modal-body">
+				<input type="text" placeholder="Registracioni broj" data-ng-model="vozilo.registracioniBroj"><br>
+				<select name="selectKartica" id="selectKartica" ng-model="vozilo.kartica.id">
+					<option ng-repeat="k in kartice" value="{{k.id}}">
+						{{k.id}}
+					</option>
+				</select>
+
+				<br>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-click="createVozilo()" class="btn btn-primary">U redu</button>
+				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="updateVoziloModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Izmeni vozilo</h4>
+			</div>
+			<div class="modal-body">
+				<input type="text" placeholder="Registracioni broj" data-ng-model="vozilo.registracioniBroj">
+
+				<br>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-click="updateVozilo()" class="btn btn-primary">U redu</button>
+				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
+			</div>
+		</div>
+	</div>
+</div>
+</div>

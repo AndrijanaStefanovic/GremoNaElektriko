@@ -1,0 +1,85 @@
+<div ng-controller='KarticaController'>
+<h1>Kartice</h1>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<td><a data-ng-click="sortType = 'imeVlasnika'">Ime vlasnika kartice<span
+					data-ng-show="sortType == 'imeVlasnika'" class="fa fa-caret-down"></span>
+			</a></td>
+			<td><a data-ng-click="sortType = 'prezimeVlasnika'"> Prezime vlasnika kartice <span
+					data-ng-show="sortType == 'prezimeVlasnika'" class="fa fa-caret-down"></span>
+			</a></td>
+			<td><a data-ng-click="sortType = 'kredit'"> Kredit <span
+					data-ng-show="sortType == 'kredit'" class="fa fa-caret-down"></span>
+			</a></td>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<tr data-ng-repeat="x in kartice | orderBy:sortType:sortReverse">
+			<td>{{x.imeVlasnika}}</td>
+			<td>{{x.prezimeVlasnika}}</td>
+			<td>{{x.kredit}}</td>
+
+			<td>
+				<button type="button" class="btn btn-info" data-ng-click="openUpdateModal(x)">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button>
+				<button type="button" class="btn btn-danger" data-ng-click="deleteKartica(x)">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<button type="button" class="btn btn-info" data-ng-click="openCreateModal()">Nova kartica</button>
+
+<div id="createKarticaModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Nova kartica</h4>
+			</div>
+			<div class="modal-body">
+				<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika"><br>
+				<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika"><br>
+				<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit"><br>
+
+				<br>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-click="createKartica()" class="btn btn-primary">U redu</button>
+				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div id="updateKarticaModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Izmeni karticu</h4>
+			</div>
+			<div class="modal-body">
+				<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika"><br>
+				<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika"><br>
+				<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit" readonly><br>
+
+				<br>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-click="updateKartica()" class="btn btn-primary">U redu</button>
+				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
+			</div>
+		</div>
+	</div>
+</div>
+</div>

@@ -22,19 +22,18 @@ public class VoziloServiceImpl implements VoziloService{
 	
 	@Override
 	public Vozilo save(Vozilo vozilo, Long karticaId) {
-		System.out.println("1");
 		Kartica kartica = karticaRepository.getOne(karticaId);
-		System.out.println("2");
 		vozilo.setKartica(kartica);
-		System.out.println("3");
 		return voziloRepository.save(vozilo);
 	}
 
 	@Override
 	public Vozilo update(Vozilo vozilo) {
-		Vozilo temp = voziloRepository.getOne(vozilo.getId());
-		temp.setRegistracioniBroj(vozilo.getRegistracioniBroj());
-		return voziloRepository.save(temp);
+		Vozilo tempVozilo = voziloRepository.getOne(vozilo.getId());
+		Kartica tempKartica = karticaRepository.getOne(vozilo.getKartica().getId());
+		tempVozilo.setRegistracioniBroj(vozilo.getRegistracioniBroj());
+		tempVozilo.setKartica(tempKartica);
+		return voziloRepository.save(tempVozilo);
 	}
 
 	@Override

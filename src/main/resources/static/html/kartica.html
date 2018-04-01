@@ -1,28 +1,28 @@
 <div ng-controller='KarticaController'>
-<h1>Kartice</h1>
+<h1>Kartica</h1>
 
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<td><a data-ng-click="sortType = 'imeVlasnika'">Ime vlasnika kartice<span
+				<td><a data-ng-click="sortType = 'imeVlasnika'">Ime vlasnika<span
 					data-ng-show="sortType == 'imeVlasnika'" class="fa fa-caret-down"></span>
-			</a></td>
-			<td><a data-ng-click="sortType = 'prezimeVlasnika'"> Prezime vlasnika kartice <span
+				</a></td>
+				<td><a data-ng-click="sortType = 'prezimeVlasnika'">Prezime vlasnika<span
 					data-ng-show="sortType == 'prezimeVlasnika'" class="fa fa-caret-down"></span>
-			</a></td>
-			<td><a data-ng-click="sortType = 'kredit'"> Kredit <span
+				</a></td>
+				<td><a data-ng-click="sortType = 'kredit'">Kredit<span
 					data-ng-show="sortType == 'kredit'" class="fa fa-caret-down"></span>
-			</a></td>
+				</a></td>
 		</tr>
 	</thead>
 
 	<tbody>
 
-		<tr data-ng-repeat="x in kartice | orderBy:sortType:sortReverse">
-			<td>{{x.imeVlasnika}}</td>
-			<td>{{x.prezimeVlasnika}}</td>
-			<td>{{x.kredit}}</td>
-
+		<tr data-ng-repeat="x in karticaList | orderBy:sortType:sortReverse">
+					<td>{{x.imeVlasnika}}</td>
+					<td>{{x.prezimeVlasnika}}</td>
+					<td>{{x.kredit}}</td>
+			
 			<td>
 				<button type="button" class="btn btn-info" data-ng-click="openUpdateModal(x)">
 					<span class="glyphicon glyphicon-pencil"></span>
@@ -35,21 +35,19 @@
 	</tbody>
 </table>
 
-
-<button type="button" class="btn btn-info" data-ng-click="openCreateModal()">Nova kartica</button>
+<button type="button" class="btn btn-info" data-ng-click="openCreateModal()">Dodaj</button>
 
 <div id="createKarticaModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Nova kartica</h4>
+				<h4 class="modal-title">Dodavanje</h4>
 			</div>
 			<div class="modal-body">
-				<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika"><br>
-				<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika"><br>
-				<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit"><br>
-
+							<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika"><br>
+							<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika"><br>
+							<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit"><br>
 				<br>
 			</div>
 			<div class="modal-footer">
@@ -60,19 +58,17 @@
 	</div>
 </div>
 
-
 <div id="updateKarticaModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Izmeni karticu</h4>
+				<h4 class="modal-title">Izmena</h4>
 			</div>
 			<div class="modal-body">
-				<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika"><br>
-				<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika"><br>
-				<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit" readonly><br>
-
+							<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika"><br>
+							<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika"><br>
+							<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit"><br>
 				<br>
 			</div>
 			<div class="modal-footer">

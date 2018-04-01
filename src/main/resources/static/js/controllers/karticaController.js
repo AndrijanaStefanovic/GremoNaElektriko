@@ -1,14 +1,14 @@
 angular.module('mbrsApp.KarticaController',[])
     .controller('KarticaController', function ($scope, KarticaService) {
     
-    	$scope.kartice = [];
-    	$scope.sortType     = 'imeVlasnika'; 
+    	$scope.karticaList = [];
+    	$scope.sortType     = 'imeVlasnika';  
 		$scope.sortReverse  = false;  
     	
     	KarticaService.findAll()
     		.then(function successCallback(response) {
-    			$scope.kartice = response.data;
-    		}, function errorCallback(respose){
+    			$scope.karticaList = response.data;
+    		}, function errorCallback(response){
     			toastr.error("Greska");
     		})
 
@@ -20,7 +20,7 @@ angular.module('mbrsApp.KarticaController',[])
     	$scope.createKartica = function() {
     		KarticaService.createKartica($scope.kartica)
     			.then(function successCallback(response) {
-    				$scope.kartice.push(response.data);
+    				$scope.karticaList.push(response.data);
     				 $('#createKarticaModal').modal('toggle');
     			})
     	}
@@ -28,8 +28,8 @@ angular.module('mbrsApp.KarticaController',[])
     	$scope.deleteKartica = function(kartica) {
     		KarticaService.deleteKartica(kartica.id)
     			.then(function successCallback(response) {
-    				var index = $scope.kartice.indexOf(kartica);
-    				$scope.kartice.splice(index, 1); 
+    				var index = $scope.karticaList.indexOf(kartica);
+    				$scope.karticaList.splice(index, 1); 
     		})
     	}
     	

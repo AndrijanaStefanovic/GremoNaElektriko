@@ -1,4 +1,4 @@
-var app = angular.module('mbrsApp.routes', ['ngRoute']);
+var app = angular.module('gremoNaElektrikoApp.routes', ['ngRoute']);
 
 app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpProvider) {
     $routeProvider
@@ -6,14 +6,13 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
             templateUrl : 'html/home.html'
         })
         
-        .when('/kartica',{
-            templateUrl : 'html/kartica.html'
+        .when('/vozilo',{
+            templateUrl : 'html/Vozilo.html'
         })
         
-        .when('/vozilo',{
-            templateUrl : 'html/vozilo.html'
+        .when('/kartica',{
+            templateUrl : 'html/Kartica.html'
         })
-    
-    	
-    
+                
+      
 }]);

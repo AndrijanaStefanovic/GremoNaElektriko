@@ -31,6 +31,7 @@ public class KarticaServiceImpl implements KarticaService{
 		temp.setImeVlasnika(kartica.getImeVlasnika());
 		temp.setPrezimeVlasnika(kartica.getPrezimeVlasnika());
 		temp.setKredit(kartica.getKredit());
+		temp.setDate(kartica.getDate());
 		return karticaRepository.save(temp);
 	}
 

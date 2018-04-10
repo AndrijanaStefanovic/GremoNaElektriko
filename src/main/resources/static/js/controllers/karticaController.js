@@ -1,10 +1,10 @@
-angular.module('mbrsApp.KarticaController',[])
-    .controller('KarticaController', function ($scope, KarticaService) {
+angular.module('gremoNaElektrikoApp.KarticaController',[])
+    .controller('KarticaController', function ($scope, KarticaService ) {
     
     	$scope.karticaList = [];
-    	$scope.sortType     = 'imeVlasnika';  
-		$scope.sortReverse  = false;  
-    	
+    	$scope.sortType     = 'imeVlasnika';
+    	$scope.sortReverse  = false;  
+    
     	KarticaService.findAll()
     		.then(function successCallback(response) {
     			$scope.karticaList = response.data;
@@ -12,13 +12,15 @@ angular.module('mbrsApp.KarticaController',[])
     			toastr.error("Greska");
     		})
 
+
     	$scope.openCreateModal = function() {
     		$scope.kartica = {};
     		$('#createKarticaModal').modal('toggle');
     	}
     		
     	$scope.createKartica = function() {
-    		KarticaService.createKartica($scope.kartica)
+
+    	KarticaService.createKartica($scope.kartica )
     			.then(function successCallback(response) {
     				$scope.karticaList.push(response.data);
     				 $('#createKarticaModal').modal('toggle');
@@ -34,7 +36,7 @@ angular.module('mbrsApp.KarticaController',[])
     	}
     	
     	$scope.openUpdateModal = function(kartica) {
-    		$scope.kartica = kartica;
+    		$scope.kartica = angular.copy(kartica);
     		$('#updateKarticaModal').modal('toggle');
     	}
     	
@@ -42,6 +44,12 @@ angular.module('mbrsApp.KarticaController',[])
     		KarticaService.updateKartica($scope.kartica)
     			.then(function successCallback(response) {
     				$('#updateKarticaModal').modal('toggle');
+    				KarticaService.findAll()
+    					.then(function successCallback(response) {
+    						$scope.karticaList = response.data;
+    					}, function errorCallback(response){
+    						toastr.error("Greska");
+    				})
     		})
     	}
     	

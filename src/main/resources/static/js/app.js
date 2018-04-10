@@ -1,6 +1,6 @@
-var app = angular.module('mbrsApp', [
-	'mbrsApp.controllers',
-    'mbrsApp.services',
-    'mbrsApp.routes',
-    'mbrsApp.directives'
+var app = angular.module('gremoNaElektrikoApp', [
+	'gremoNaElektrikoApp.controllers',
+    'gremoNaElektrikoApp.services',
+    'gremoNaElektrikoApp.routes',
+    'gremoNaElektrikoApp.directives'
 ]);

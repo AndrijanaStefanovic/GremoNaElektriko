@@ -19,9 +19,9 @@
 	<tbody>
 
 		<tr data-ng-repeat="x in karticaList | orderBy:sortType:sortReverse">
-					<td>{{x.imeVlasnika}}</td>
-					<td>{{x.prezimeVlasnika}}</td>
-					<td>{{x.kredit}}</td>
+					<td>{{x.imeVlasnika }}</td>
+					<td>{{x.prezimeVlasnika }}</td>
+					<td>{{x.kredit }}</td>
 			
 			<td>
 				<button type="button" class="btn btn-info" data-ng-click="openUpdateModal(x)">
@@ -45,9 +45,9 @@
 				<h4 class="modal-title">Dodavanje</h4>
 			</div>
 			<div class="modal-body">
-							<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika"><br>
-							<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika"><br>
-							<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit"><br>
+							<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika" ><br>
+							<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika" ><br>
+							<input type="number" placeholder="Kredit" data-ng-model="kartica.kredit" ><br>
 				<br>
 			</div>
 			<div class="modal-footer">
@@ -66,9 +66,9 @@
 				<h4 class="modal-title">Izmena</h4>
 			</div>
 			<div class="modal-body">
-							<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika"><br>
-							<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika"><br>
-							<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit"><br>
+							<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika" ><br>
+							<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika" ><br>
+							<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit"  readonly><br>
 				<br>
 			</div>
 			<div class="modal-footer">

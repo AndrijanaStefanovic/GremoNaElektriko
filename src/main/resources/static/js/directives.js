@@ -1,3 +1,3 @@
-angular.module('mbrsApp.directives',[
+angular.module('gremoNaElektrikoApp.directives',[
 
 ]);

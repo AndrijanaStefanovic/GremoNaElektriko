@@ -1,4 +1,4 @@
-angular.module('mbrsApp.services',[
-	'mbrsApp.KarticaService',
-	'mbrsApp.VoziloService'
+angular.module('gremoNaElektrikoApp.services',[
+	'gremoNaElektrikoApp.VoziloService',
+	'gremoNaElektrikoApp.KarticaService',
 ]);

@@ -1,21 +1,21 @@
-angular.module('mbrsApp.VoziloService', [])
+angular.module('gremoNaElektrikoApp.VoziloService', [])
 	.factory('VoziloService', function($http) {
 		var factory = {};
 		
 		factory.findAll = function() {
-			return $http.get('/mbrs/vozilo');
+			return $http.get('/gremoNaElektriko/vozilo');
 		}
-
-		factory.createVozilo = function(vozilo, karticaId) {
-			return $http.post('/mbrs/vozilo/'+karticaId, vozilo);
+		
+		factory.createVozilo = function(vozilo , karticaId) {
+			return $http.post('/gremoNaElektriko/vozilo'+'/'+karticaId, vozilo);
 		}
 		
 		factory.deleteVozilo = function(id) {
-			return $http.delete('/mbrs/vozilo/'+id);
+			return $http.delete('/gremoNaElektriko/vozilo/'+id);
 		}
 		
 		factory.updateVozilo = function(vozilo) {
-			return $http.put('/mbrs/vozilo', vozilo);
+			return $http.put('/gremoNaElektriko/vozilo', vozilo);
 		}
 		
 		return factory;

@@ -1,6 +1,7 @@
 package com.ftn.mbrs.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,10 +26,21 @@ public class Kartica implements Serializable {
 	private String prezimeVlasnika;
 	
 	@Column
+	private Date date;
+	
+	@Column
 	private float kredit;
 
 	public Kartica() {}
 	
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	public Kartica(String imeVlasnika, String prezimeVlasnika, float kredit) {
 		this.imeVlasnika = imeVlasnika;
 		this.prezimeVlasnika = prezimeVlasnika;

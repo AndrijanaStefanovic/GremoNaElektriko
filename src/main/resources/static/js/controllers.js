@@ -1,4 +1,4 @@
-angular.module('mbrsApp.controllers',[
-	'mbrsApp.KarticaController',
-	'mbrsApp.VoziloController'
+angular.module('gremoNaElektrikoApp.controllers',[
+	'gremoNaElektrikoApp.VoziloController',
+	'gremoNaElektrikoApp.KarticaController',
 ]);

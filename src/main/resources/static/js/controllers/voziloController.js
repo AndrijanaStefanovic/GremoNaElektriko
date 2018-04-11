@@ -3,9 +3,9 @@ angular.module('gremoNaElektrikoApp.VoziloController',[])
     
     	$scope.voziloList = [];
     	$scope.karticaList = [];	
-    	$scope.modelList = [];	
     	$scope.sortType     = 'registracioniBroj';
     	$scope.sortReverse  = false;  
+    	$scope.searchKeyword = "";
     
     	VoziloService.findAll()
     		.then(function successCallback(response) {
@@ -22,10 +22,9 @@ angular.module('gremoNaElektrikoApp.VoziloController',[])
     		})
     		
 
-
     	$scope.openCreateModal = function() {
     		$scope.vozilo = {};
-    		$scope.vozilo.kartica = {}
+    		$scope.vozilo.kartica = {};
     		$('#createVoziloModal').modal('toggle');
     	}
     		
@@ -65,5 +64,16 @@ angular.module('gremoNaElektrikoApp.VoziloController',[])
     				})
     		})
     	}
+    	
+    	$scope.filterFunction = function(vozilo) {
+    		if($scope.searchKeyword == "")
+    			return true;
+    		var check = vozilo.kartica.imeVlasnika+" "+vozilo.kartica.prezimeVlasnika+" "+" ";
+    		if(check.includes($scope.searchKeyword))
+    	    {
+    	       	return true; 
+    	    }
+    		return false;
+    	};
     	
     });

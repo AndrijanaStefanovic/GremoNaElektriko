@@ -1,3 +1,4 @@
+
 <div ng-controller='KarticaController'>
 <h1>Kartica</h1>
 
@@ -45,13 +46,15 @@
 				<h4 class="modal-title">Dodavanje</h4>
 			</div>
 			<div class="modal-body">
-							<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika" ><br>
-							<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika" ><br>
-							<input type="number" placeholder="Kredit" data-ng-model="kartica.kredit" ><br>
+				<form name="createForm">
+							<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika" maxlength="30" required><br>
+							<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika" maxlength="30" required><br>
+							<input type="number" placeholder="Kredit" data-ng-model="kartica.kredit"   required><br>
 				<br>
+				</form>
 			</div>
 			<div class="modal-footer">
-				<button data-ng-click="createKartica()" class="btn btn-primary">U redu</button>
+				<button data-ng-click="createKartica()" class="btn btn-primary" data-ng-disabled="!createForm.$valid">U redu</button>
 				<input type="button" class="btn btn-primary" value="Otkai" data-dismiss="modal">
 			</div>
 		</div>
@@ -66,16 +69,20 @@
 				<h4 class="modal-title">Izmena</h4>
 			</div>
 			<div class="modal-body">
-							<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika" ><br>
-							<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika" ><br>
-							<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit"  readonly><br>
+				<form name="updateForm">
+							<input type="text" placeholder="Ime vlasnika" data-ng-model="kartica.imeVlasnika"  required><br>
+							<input type="text" placeholder="Prezime vlasnika" data-ng-model="kartica.prezimeVlasnika"  required><br>
+							<input type="text" placeholder="Kredit" data-ng-model="kartica.kredit"  readonly required><br>
 				<br>
+				</form>
 			</div>
 			<div class="modal-footer">
-				<button data-ng-click="updateKartica()" class="btn btn-primary">U redu</button>
+				<button data-ng-click="updateKartica()" class="btn btn-primary" data-ng-disabled="!updateForm.$valid">U redu</button>
 				<input type="button" class="btn btn-primary" value="Otkai" data-dismiss="modal">
 			</div>
 		</div>
 	</div>
 </div>
 </div>
+
+<button-directive></button-directive>

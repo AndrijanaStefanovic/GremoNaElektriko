@@ -47,16 +47,18 @@
 				<h4 class="modal-title">Dodavanje</h4>
 			</div>
 			<div class="modal-body">
-							<input type="text" placeholder="Registracioni broj" data-ng-model="vozilo.registracioniBroj" ><br>
-						<select name="selectKartica" id="selectKartica" ng-model="vozilo.kartica.id">
+				<form name="createForm">
+							<input type="text" placeholder="Registracioni broj" data-ng-model="vozilo.registracioniBroj" maxlength="30" required><br>
+						<select name="selectKartica" id="selectKartica" ng-model="vozilo.kartica.id" required>
 							<option ng-repeat="x in karticaList" value="{{x.id}}">
 							{{x.imeVlasnika}} {{x.prezimeVlasnika}} 
 							</option>
 						</select>
 				<br>
+				</form>
 			</div>
 			<div class="modal-footer">
-				<button data-ng-click="createVozilo()" class="btn btn-primary">U redu</button>
+				<button data-ng-click="createVozilo()" class="btn btn-primary" data-ng-disabled="!createForm.$valid">U redu</button>
 				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
 			</div>
 		</div>
@@ -71,16 +73,18 @@
 				<h4 class="modal-title">Izmena</h4>
 			</div>
 			<div class="modal-body">
-							<input type="text" placeholder="Registracioni broj" data-ng-model="vozilo.registracioniBroj" ><br>
-						<select id="updateSelectKartica">
+				<form name="updateForm">
+							<input type="text" placeholder="Registracioni broj" data-ng-model="vozilo.registracioniBroj"  required><br>
+						<select id="updateSelectKartica" required>
 							<option data-ng-repeat="x in karticaList" value="{{x.id}}">
 								{{x.imeVlasnika}} {{x.prezimeVlasnika}} 
 							</option>
 						</select>
 				<br>
+				</form>
 			</div>
 			<div class="modal-footer">
-				<button data-ng-click="updateVozilo()" class="btn btn-primary">U redu</button>
+				<button data-ng-click="updateVozilo()" class="btn btn-primary" data-ng-disabled="!updateForm.$valid">U redu</button>
 				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
 			</div>
 		</div>

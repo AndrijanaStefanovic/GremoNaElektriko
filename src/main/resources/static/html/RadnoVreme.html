@@ -1,0 +1,111 @@
+<div ng-controller='RadnoVremeController'>
+<h1>RadnoVreme</h1>
+
+<input type="text" class="form-control ng-valid ng-dirty" placeholder="Pretraga" data-ng-model="searchKeyword">
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+				<td><a data-ng-click="sortType = 'danUNedelji'">Dan u nedelji<span
+					data-ng-show="sortType == 'danUNedelji'" class="fa fa-caret-down"></span>
+				</a></td>
+				<td><a data-ng-click="sortType = 'vremeOtvaranja'">Vreme otvaranja<span
+					data-ng-show="sortType == 'vremeOtvaranja'" class="fa fa-caret-down"></span>
+				</a></td>
+				<td><a data-ng-click="sortType = 'vremeZatvaranja'">Vreme zatvaranja<span
+					data-ng-show="sortType == 'vremeZatvaranja'" class="fa fa-caret-down"></span>
+				</a></td>
+				<td><a data-ng-click="sortType = 'stanica.adresa'">Adresa <span
+					data-ng-show="sortType == 'stanica.adresa'" class="fa fa-caret-down"></span>
+				</a></td>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<tr data-ng-repeat="x in radnoVremeList | orderBy:sortType:sortReverse | filter:filterFunction ">
+					<td>{{x.danUNedelji }}</td>
+					<td>{{x.vremeOtvaranja | date : "dd-MM-yyyy HH:mm" }}</td>
+					<td>{{x.vremeZatvaranja | date : "dd-MM-yyyy HH:mm" }}</td>
+					<td>{{x.stanica.adresa}}</td>
+			
+			<td>
+				<button type="button" class="btn btn-info" data-ng-click="openUpdateModal(x)">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button>
+				<button type="button" class="btn btn-danger" data-ng-click="deleteRadnoVreme(x)">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<button type="button" class="btn btn-info" data-ng-click="openCreateModal()">Dodaj</button>
+
+<div id="createRadnoVremeModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Dodavanje</h4>
+			</div>
+			<div class="modal-body">
+				<form name="createForm">
+							<div class="input-group date" id="dateTimeVremeOtvaranja" data-ng-init="initDateTimePickerVremeOtvaranja()">
+				 				<input type="text" class="form-control" id="dateTextFieldVremeOtvaranja"/> 
+				 				<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span></span> 
+							</div> 
+							<div class="input-group date" id="dateTimeVremeZatvaranja" data-ng-init="initDateTimePickerVremeZatvaranja()">
+				 				<input type="text" class="form-control" id="dateTextFieldVremeZatvaranja"/> 
+				 				<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span></span> 
+							</div> 
+						<select name="selectStanica" id="selectStanica" ng-model="radnoVreme.stanica.id" required>
+							<option ng-repeat="x in stanicaList" value="{{x.id}}">
+							{{x.adresa}} 
+							</option>
+						</select>
+				<br>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-click="createRadnoVreme()" class="btn btn-primary" data-ng-disabled="!createForm.$valid">U redu</button>
+				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="updateRadnoVremeModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Izmena</h4>
+			</div>
+			<div class="modal-body">
+				<form name="updateForm">
+							<div class="input-group date" id="updateDateTimeVremeOtvaranja" data-ng-init="initDateTimePickerVremeOtvaranja()">
+				 				<input type="text" class="form-control" id="updateDateTextFieldVremeOtvaranja"/> 
+				 				<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span></span> 
+							</div> 
+							<div class="input-group date" id="updateDateTimeVremeZatvaranja" data-ng-init="initDateTimePickerVremeZatvaranja()">
+				 				<input type="text" class="form-control" id="updateDateTextFieldVremeZatvaranja"/> 
+				 				<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span></span> 
+							</div> 
+						<select id="updateSelectStanica" required>
+							<option data-ng-repeat="x in stanicaList" value="{{x.id}}">
+								{{x.adresa}} 
+							</option>
+						</select>
+				<br>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-click="updateRadnoVreme()" class="btn btn-primary" data-ng-disabled="!updateForm.$valid">U redu</button>
+				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
+			</div>
+		</div>
+	</div>
+</div>
+</div>

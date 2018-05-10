@@ -6,10 +6,10 @@ angular.module('gremoNaElektrikoApp.VoziloService', [])
 			return $http.get('/gremoNaElektriko/vozilo');
 		}
 		
-		factory.createVozilo = function(vozilo , karticaId) {
-			return $http.post('/gremoNaElektriko/vozilo'+'/'+karticaId, vozilo);
+		factory.createVozilo = function(vozilo , modelVozilaId, karticaId) {
+			return $http.post('/gremoNaElektriko/vozilo'+'/'+modelVozilaId+'/'+karticaId, vozilo);
 		}
-		
+
 		factory.deleteVozilo = function(id) {
 			return $http.delete('/gremoNaElektriko/vozilo/'+id);
 		}

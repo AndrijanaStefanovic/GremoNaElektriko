@@ -6,10 +6,10 @@ angular.module('gremoNaElektrikoApp.KarticaService', [])
 			return $http.get('/gremoNaElektriko/kartica');
 		}
 		
-		factory.createKartica = function(kartica) {
+		factory.createKartica = function(kartica ) {
 			return $http.post('/gremoNaElektriko/kartica', kartica);
 		}
-		
+
 		factory.deleteKartica = function(id) {
 			return $http.delete('/gremoNaElektriko/kartica/'+id);
 		}

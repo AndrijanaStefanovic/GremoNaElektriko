@@ -9,6 +9,9 @@
 				<td><a data-ng-click="sortType = 'registracioniBroj'">Registracioni broj<span
 					data-ng-show="sortType == 'registracioniBroj'" class="fa fa-caret-down"></span>
 				</a></td>
+				<td><a data-ng-click="sortType = 'modelVozila.naziv'">Naziv <span
+					data-ng-show="sortType == 'modelVozila.naziv'" class="fa fa-caret-down"></span>
+				</a></td>
 				<td><a data-ng-click="sortType = 'kartica.imeVlasnika'">Ime Vlasnika <span
 					data-ng-show="sortType == 'kartica.imeVlasnika'" class="fa fa-caret-down"></span>
 				</a></td>
@@ -22,6 +25,7 @@
 
 		<tr data-ng-repeat="x in voziloList | orderBy:sortType:sortReverse | filter:filterFunction ">
 					<td>{{x.registracioniBroj }}</td>
+					<td>{{x.modelVozila.naziv}}</td>
 					<td>{{x.kartica.imeVlasnika}}</td>
 					<td>{{x.kartica.prezimeVlasnika}}</td>
 			
@@ -49,6 +53,11 @@
 			<div class="modal-body">
 				<form name="createForm">
 							<input type="text" placeholder="Registracioni broj" data-ng-model="vozilo.registracioniBroj" maxlength="30" required><br>
+						<select name="selectModelVozila" id="selectModelVozila" ng-model="vozilo.modelVozila.id" required>
+							<option ng-repeat="x in modelVozilaList" value="{{x.id}}">
+							{{x.naziv}} 
+							</option>
+						</select>
 						<select name="selectKartica" id="selectKartica" ng-model="vozilo.kartica.id" required>
 							<option ng-repeat="x in karticaList" value="{{x.id}}">
 							{{x.imeVlasnika}} {{x.prezimeVlasnika}} 
@@ -75,6 +84,11 @@
 			<div class="modal-body">
 				<form name="updateForm">
 							<input type="text" placeholder="Registracioni broj" data-ng-model="vozilo.registracioniBroj"  required><br>
+						<select id="updateSelectModelVozila" required>
+							<option data-ng-repeat="x in modelVozilaList" value="{{x.id}}">
+								{{x.naziv}} 
+							</option>
+						</select>
 						<select id="updateSelectKartica" required>
 							<option data-ng-repeat="x in karticaList" value="{{x.id}}">
 								{{x.imeVlasnika}} {{x.prezimeVlasnika}} 

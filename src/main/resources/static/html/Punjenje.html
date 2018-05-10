@@ -1,0 +1,135 @@
+<div ng-controller='PunjenjeController'>
+<h1>Punjenje</h1>
+
+<input type="text" class="form-control ng-valid ng-dirty" placeholder="Pretraga" data-ng-model="searchKeyword">
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+				<td><a data-ng-click="sortType = 'pocetakPunjenja'">Po?etak punjenja<span
+					data-ng-show="sortType == 'pocetakPunjenja'" class="fa fa-caret-down"></span>
+				</a></td>
+				<td><a data-ng-click="sortType = 'krajPunjenja'">Kraj punjenja<span
+					data-ng-show="sortType == 'krajPunjenja'" class="fa fa-caret-down"></span>
+				</a></td>
+				<td><a data-ng-click="sortType = 'vozilo.registracioniBroj'">Registracioni Broj <span
+					data-ng-show="sortType == 'vozilo.registracioniBroj'" class="fa fa-caret-down"></span>
+				</a></td>
+				<td><a data-ng-click="sortType = 'tipPrikljucka.naziv'">Naziv <span
+					data-ng-show="sortType == 'tipPrikljucka.naziv'" class="fa fa-caret-down"></span>
+				</a></td>
+				<td><a data-ng-click="sortType = 'stanica.adresa'">Adresa <span
+					data-ng-show="sortType == 'stanica.adresa'" class="fa fa-caret-down"></span>
+				</a></td>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<tr data-ng-repeat="x in punjenjeList | orderBy:sortType:sortReverse | filter:filterFunction ">
+					<td>{{x.pocetakPunjenja | date : "dd-MM-yyyy HH:mm" }}</td>
+					<td>{{x.krajPunjenja | date : "dd-MM-yyyy HH:mm" }}</td>
+					<td>{{x.vozilo.registracioniBroj}}</td>
+					<td>{{x.tipPrikljucka.naziv}}</td>
+					<td>{{x.stanica.adresa}}</td>
+			
+			<td>
+				<button type="button" class="btn btn-info" data-ng-click="openUpdateModal(x)">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button>
+				<button type="button" class="btn btn-danger" data-ng-click="deletePunjenje(x)">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<button type="button" class="btn btn-info" data-ng-click="openCreateModal()">Dodaj</button>
+
+<div id="createPunjenjeModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Dodavanje</h4>
+			</div>
+			<div class="modal-body">
+				<form name="createForm">
+							<div class="input-group date" id="dateTimePocetakPunjenja" data-ng-init="initDateTimePickerPocetakPunjenja()">
+				 				<input type="text" class="form-control" id="dateTextFieldPocetakPunjenja"/> 
+				 				<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span></span> 
+							</div> 
+							<div class="input-group date" id="dateTimeKrajPunjenja" data-ng-init="initDateTimePickerKrajPunjenja()">
+				 				<input type="text" class="form-control" id="dateTextFieldKrajPunjenja"/> 
+				 				<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span></span> 
+							</div> 
+						<select name="selectVozilo" id="selectVozilo" ng-model="punjenje.vozilo.id" required>
+							<option ng-repeat="x in voziloList" value="{{x.id}}">
+							{{x.registracioniBroj}} 
+							</option>
+						</select>
+						<select name="selectTipPrikljucka" id="selectTipPrikljucka" ng-model="punjenje.tipPrikljucka.id" required>
+							<option ng-repeat="x in tipPrikljuckaList" value="{{x.id}}">
+							{{x.naziv}} 
+							</option>
+						</select>
+						<select name="selectStanica" id="selectStanica" ng-model="punjenje.stanica.id" required>
+							<option ng-repeat="x in stanicaList" value="{{x.id}}">
+							{{x.adresa}} 
+							</option>
+						</select>
+				<br>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-click="createPunjenje()" class="btn btn-primary" data-ng-disabled="!createForm.$valid">U redu</button>
+				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="updatePunjenjeModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Izmena</h4>
+			</div>
+			<div class="modal-body">
+				<form name="updateForm">
+							<div class="input-group date" id="updateDateTimePocetakPunjenja" data-ng-init="initDateTimePickerPocetakPunjenja()">
+				 				<input type="text" class="form-control" id="updateDateTextFieldPocetakPunjenja"/> 
+				 				<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span></span> 
+							</div> 
+							<div class="input-group date" id="updateDateTimeKrajPunjenja" data-ng-init="initDateTimePickerKrajPunjenja()">
+				 				<input type="text" class="form-control" id="updateDateTextFieldKrajPunjenja"/> 
+				 				<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span></span> 
+							</div> 
+						<select id="updateSelectVozilo" required>
+							<option data-ng-repeat="x in voziloList" value="{{x.id}}">
+								{{x.registracioniBroj}} 
+							</option>
+						</select>
+						<select id="updateSelectTipPrikljucka" required>
+							<option data-ng-repeat="x in tipPrikljuckaList" value="{{x.id}}">
+								{{x.naziv}} 
+							</option>
+						</select>
+						<select id="updateSelectStanica" required>
+							<option data-ng-repeat="x in stanicaList" value="{{x.id}}">
+								{{x.adresa}} 
+							</option>
+						</select>
+				<br>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-click="updatePunjenje()" class="btn btn-primary" data-ng-disabled="!updateForm.$valid">U redu</button>
+				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
+			</div>
+		</div>
+	</div>
+</div>
+</div>

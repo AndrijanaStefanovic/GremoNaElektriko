@@ -30,8 +30,12 @@ angular.module('gremoNaElektrikoApp.KarticaController',[])
     	$scope.deleteKartica = function(kartica) {
     		KarticaService.deleteKartica(kartica.id)
     			.then(function successCallback(response) {
-    				var index = $scope.karticaList.indexOf(kartica);
-    				$scope.karticaList.splice(index, 1); 
+    				if(response.data != "OK") {
+    					toastr.error("Nije moguce brisanje.");
+    				} else {
+    					var index = $scope.karticaList.indexOf(kartica);
+    					$scope.karticaList.splice(index, 1); 
+    				}
     		})
     	}
     	
@@ -52,5 +56,6 @@ angular.module('gremoNaElektrikoApp.KarticaController',[])
     				})
     		})
     	}
+    	
     	
     });

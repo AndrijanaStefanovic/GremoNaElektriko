@@ -1,0 +1,89 @@
+<div ng-controller='StanicaController'>
+<h1>Stanica</h1>
+
+<input type="text" class="form-control ng-valid ng-dirty" placeholder="Pretraga" data-ng-model="searchKeyword">
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+				<td><a data-ng-click="sortType = 'adresa'">Adresa<span
+					data-ng-show="sortType == 'adresa'" class="fa fa-caret-down"></span>
+				</a></td>
+				<td><a data-ng-click="sortType = 'grad.naziv'">Naziv <span
+					data-ng-show="sortType == 'grad.naziv'" class="fa fa-caret-down"></span>
+				</a></td>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<tr data-ng-repeat="x in stanicaList | orderBy:sortType:sortReverse | filter:filterFunction ">
+					<td>{{x.adresa }}</td>
+					<td>{{x.grad.naziv}}</td>
+			
+			<td>
+				<button type="button" class="btn btn-info" data-ng-click="openUpdateModal(x)">
+					<span class="glyphicon glyphicon-pencil"></span>
+				</button>
+				<button type="button" class="btn btn-danger" data-ng-click="deleteStanica(x)">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<button type="button" class="btn btn-info" data-ng-click="openCreateModal()">Dodaj</button>
+
+<div id="createStanicaModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Dodavanje</h4>
+			</div>
+			<div class="modal-body">
+				<form name="createForm">
+							<input type="text" placeholder="Adresa" data-ng-model="stanica.adresa" maxlength="30" required><br>
+						<select name="selectGrad" id="selectGrad" ng-model="stanica.grad.id" required>
+							<option ng-repeat="x in gradList" value="{{x.id}}">
+							{{x.naziv}} 
+							</option>
+						</select>
+				<br>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-click="createStanica()" class="btn btn-primary" data-ng-disabled="!createForm.$valid">U redu</button>
+				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="updateStanicaModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Izmena</h4>
+			</div>
+			<div class="modal-body">
+				<form name="updateForm">
+							<input type="text" placeholder="Adresa" data-ng-model="stanica.adresa"  required><br>
+						<select id="updateSelectGrad" required>
+							<option data-ng-repeat="x in gradList" value="{{x.id}}">
+								{{x.naziv}} 
+							</option>
+						</select>
+				<br>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button data-ng-click="updateStanica()" class="btn btn-primary" data-ng-disabled="!updateForm.$valid">U redu</button>
+				<input type="button" class="btn btn-primary" value="Otkaži" data-dismiss="modal">
+			</div>
+		</div>
+	</div>
+</div>
+</div>

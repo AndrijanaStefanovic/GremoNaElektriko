@@ -23,9 +23,9 @@ public class VoziloController {
 	@Autowired
 	private VoziloService voziloService;
 	
-	@RequestMapping(value = "/{karticaId}", method = RequestMethod.POST)
-	public ResponseEntity<Vozilo> save(@Valid @RequestBody Vozilo vozilo, @PathVariable Long karticaId) {
-		Vozilo savedVozilo = voziloService.save(vozilo, karticaId);
+	@RequestMapping(value = "/{modelVozilaId}/{karticaId}", method = RequestMethod.POST)
+	public ResponseEntity<Vozilo> save(@Valid @RequestBody Vozilo vozilo, @PathVariable Long modelVozilaId, @PathVariable Long karticaId) {
+		Vozilo savedVozilo = voziloService.save(vozilo, modelVozilaId, karticaId);
 		return new ResponseEntity<Vozilo>(savedVozilo, HttpStatus.CREATED);
 	}
 	
@@ -34,22 +34,22 @@ public class VoziloController {
 		Vozilo updatedVozilo = voziloService.update(vozilo);
 		return new ResponseEntity<Vozilo>(updatedVozilo, HttpStatus.OK);
 	}
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Long> delete(@PathVariable Long id) {
-		voziloService.delete(id);
-		return new ResponseEntity<Long>(id, HttpStatus.OK);
+		
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/plain")
+	public ResponseEntity<String> delete(@PathVariable Long id) {
+		String response = voziloService.delete(id);
+		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Vozilo> findOne(@PathVariable Long id) {
-		Vozilo vozilo= voziloService.findOne(id);
+		Vozilo vozilo = voziloService.findOne(id);
 		return new ResponseEntity<Vozilo>(vozilo, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Vozilo>> findAll() {
-		List<Vozilo> vozila = voziloService.findAll();
-		return new ResponseEntity<List<Vozilo>>(vozila, HttpStatus.OK);
+		List<Vozilo> vozilos = voziloService.findAll();
+		return new ResponseEntity<List<Vozilo>>(vozilos, HttpStatus.OK);
 	}
 }

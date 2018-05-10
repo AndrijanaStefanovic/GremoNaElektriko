@@ -13,43 +13,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.mbrs.model.Kartica;
-import com.ftn.mbrs.service.KarticaService;
+import com.ftn.mbrs.model.Grad;
+import com.ftn.mbrs.service.GradService;
 
 @RestController
-@RequestMapping("kartica")
-public class KarticaController {
+@RequestMapping("grad")
+public class GradController {
 
 	@Autowired
-	private KarticaService karticaService;
+	private GradService gradService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Kartica> save(@Valid @RequestBody Kartica kartica) {
-		Kartica savedKartica = karticaService.save(kartica);
-		return new ResponseEntity<Kartica>(savedKartica, HttpStatus.CREATED);
+	public ResponseEntity<Grad> save(@Valid @RequestBody Grad grad) {
+		Grad savedGrad = gradService.save(grad);
+		return new ResponseEntity<Grad>(savedGrad, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Kartica> update(@Valid @RequestBody Kartica kartica) {
-		Kartica updatedKartica = karticaService.update(kartica);
-		return new ResponseEntity<Kartica>(updatedKartica, HttpStatus.OK);
+	public ResponseEntity<Grad> update(@Valid @RequestBody Grad grad) {
+		Grad updatedGrad = gradService.update(grad);
+		return new ResponseEntity<Grad>(updatedGrad, HttpStatus.OK);
 	}
 		
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/plain")
 	public ResponseEntity<String> delete(@PathVariable Long id) {
-		String response = karticaService.delete(id);
+		String response = gradService.delete(id);
 		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Kartica> findOne(@PathVariable Long id) {
-		Kartica kartica = karticaService.findOne(id);
-		return new ResponseEntity<Kartica>(kartica, HttpStatus.OK);
+	public ResponseEntity<Grad> findOne(@PathVariable Long id) {
+		Grad grad = gradService.findOne(id);
+		return new ResponseEntity<Grad>(grad, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Kartica>> findAll() {
-		List<Kartica> karticas = karticaService.findAll();
-		return new ResponseEntity<List<Kartica>>(karticas, HttpStatus.OK);
+	public ResponseEntity<List<Grad>> findAll() {
+		List<Grad> grads = gradService.findAll();
+		return new ResponseEntity<List<Grad>>(grads, HttpStatus.OK);
 	}
 }

@@ -13,43 +13,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.mbrs.model.Kartica;
-import com.ftn.mbrs.service.KarticaService;
+import com.ftn.mbrs.model.Cenovnik;
+import com.ftn.mbrs.service.CenovnikService;
 
 @RestController
-@RequestMapping("kartica")
-public class KarticaController {
+@RequestMapping("cenovnik")
+public class CenovnikController {
 
 	@Autowired
-	private KarticaService karticaService;
+	private CenovnikService cenovnikService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Kartica> save(@Valid @RequestBody Kartica kartica) {
-		Kartica savedKartica = karticaService.save(kartica);
-		return new ResponseEntity<Kartica>(savedKartica, HttpStatus.CREATED);
+	public ResponseEntity<Cenovnik> save(@Valid @RequestBody Cenovnik cenovnik) {
+		Cenovnik savedCenovnik = cenovnikService.save(cenovnik);
+		return new ResponseEntity<Cenovnik>(savedCenovnik, HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public ResponseEntity<Kartica> update(@Valid @RequestBody Kartica kartica) {
-		Kartica updatedKartica = karticaService.update(kartica);
-		return new ResponseEntity<Kartica>(updatedKartica, HttpStatus.OK);
+	public ResponseEntity<Cenovnik> update(@Valid @RequestBody Cenovnik cenovnik) {
+		Cenovnik updatedCenovnik = cenovnikService.update(cenovnik);
+		return new ResponseEntity<Cenovnik>(updatedCenovnik, HttpStatus.OK);
 	}
 		
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/plain")
 	public ResponseEntity<String> delete(@PathVariable Long id) {
-		String response = karticaService.delete(id);
+		String response = cenovnikService.delete(id);
 		return new ResponseEntity<String>(response, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Kartica> findOne(@PathVariable Long id) {
-		Kartica kartica = karticaService.findOne(id);
-		return new ResponseEntity<Kartica>(kartica, HttpStatus.OK);
+	public ResponseEntity<Cenovnik> findOne(@PathVariable Long id) {
+		Cenovnik cenovnik = cenovnikService.findOne(id);
+		return new ResponseEntity<Cenovnik>(cenovnik, HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Kartica>> findAll() {
-		List<Kartica> karticas = karticaService.findAll();
-		return new ResponseEntity<List<Kartica>>(karticas, HttpStatus.OK);
+	public ResponseEntity<List<Cenovnik>> findAll() {
+		List<Cenovnik> cenovniks = cenovnikService.findAll();
+		return new ResponseEntity<List<Cenovnik>>(cenovniks, HttpStatus.OK);
 	}
 }

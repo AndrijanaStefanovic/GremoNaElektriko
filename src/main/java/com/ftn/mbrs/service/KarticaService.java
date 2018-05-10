@@ -10,7 +10,7 @@ public interface KarticaService {
 	
 	public Kartica update(Kartica kartica);
 
-	public void delete(Long id);
+	public String delete(Long id);
 	
 	public Kartica findOne(Long id);
 	

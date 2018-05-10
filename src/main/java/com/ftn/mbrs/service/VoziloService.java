@@ -6,11 +6,11 @@ import com.ftn.mbrs.model.Vozilo;
 
 public interface VoziloService {
 
-	public Vozilo save(Vozilo vozilo, Long karticaId);
+	public Vozilo save(Vozilo vozilo, Long modelVozilaId, Long karticaId);
 	
 	public Vozilo update(Vozilo vozilo);
 
-	public void delete(Long id);
+	public String delete(Long id);
 	
 	public Vozilo findOne(Long id);
 	

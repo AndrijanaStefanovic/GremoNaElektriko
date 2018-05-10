@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.ftn.mbrs.model.Kartica;
+import com.ftn.mbrs.model.MarkaVozila;
 
-public interface KarticaRepository extends JpaRepository<Kartica, Long> {
+public interface MarkaVozilaRepository extends JpaRepository<MarkaVozila, Long> {
 
 
 }
